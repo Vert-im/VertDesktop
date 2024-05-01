@@ -12,11 +12,7 @@ if (WIN32)
 	set(HIDE_WINDOWS_CONSOLE_ On)
 endif()
 
-ADD_DEFINITIONS(-DUNICODE)
-ADD_DEFINITIONS(-D_UNICODE)
-
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /UMBCS /D_UNICODE /DUNICODE")
-
+find_package(OpenGL REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
@@ -44,7 +40,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 	thirdparty/backends
 )
 
-set(LINKABLE_LIBS opengl32 glfw imgui::imgui spdlog::spdlog nlohmann_json::nlohmann_json)
+set(LINKABLE_LIBS OpenGL::GL glfw imgui::imgui spdlog::spdlog nlohmann_json::nlohmann_json)
 
 if (WIN32)
 	target_link_directories(${PROJECT_NAME} PRIVATE thirdparty/win32)

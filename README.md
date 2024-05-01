@@ -32,6 +32,10 @@ Press OK
 
 Install all dependencies using vcpkg:
 
+`vcpkg integrate install`
+
+`vcpkg install opengl:x64-windows-static`
+
 `vcpkg install glfw3:x64-windows-static`
 
 `vcpkg install imgui[core,opengl3-binding,glfw-binding]:x64-windows-static`
@@ -45,5 +49,45 @@ Install all dependencies using vcpkg:
 ## Building
 
 Configure CMake with vcpkg toolchain file (I'm lazy to show you how, sorry) and press Build
+
+Done!
+
+
+# Building on Linux
+
+## Tools
+
+- CMake 3.29
+- C++20
+- LLVM Clang++18
+- vcpkg (x64-linux triplet)
+
+## Preparation
+
+Open Terminal in your Vert Desktop Folder
+
+Install all dependencies using vcpkg:
+
+`vcpkg integrate install`
+
+`vcpkg install opengl:x64-linux`
+
+`vcpkg install glfw3:x64-linux`
+
+`vcpkg install imgui[core,opengl3-binding,glfw-binding]:x64-linux`
+
+`vcpkg install spdlog:x64-linux`
+
+`vcpkg install nlohmann-json:x64-linux`
+
+## Configuring
+
+(Modify this command for proper configuring)
+
+`/usr/bin/cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_TOOLCHAIN_FILE:STRING=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_ROOT:STRING=/opt/vcpkg -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/clang -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/clang++ -S/path/to/project -B/path/to/project/build -G Ninja`
+
+## Building
+
+`/usr/bin/cmake --build /path/to/project/build --config Debug --target all --`
 
 Done!

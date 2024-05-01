@@ -3,6 +3,7 @@
 
 void vert_awake() {
     VertSettings::get()->init();
+    // Hi
 }
 
 
