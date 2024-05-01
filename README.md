@@ -40,7 +40,7 @@ Install all dependencies using vcpkg:
 
 `vcpkg install nlohmann-json:x64-windows-static`
 
-**MAKE SURE YOU SET ALL PATHS IN CMakeSettings CORRECTLY! (for example, vcpkg toolchain path, dependencies paths etc.)**
+**MAKE SURE YOU SET ALL PATHS IN CMakeSettings.json CORRECTLY! (for example, vcpkg toolchain path, dependencies paths etc.)**
 
 ## Building
 
