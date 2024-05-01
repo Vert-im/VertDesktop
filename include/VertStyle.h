@@ -10,6 +10,5 @@ public:
 
 	void setup();
 	void updateColors();
-	bool loadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
 	void setupWindowIcon();
 };

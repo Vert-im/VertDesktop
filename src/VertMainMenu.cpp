@@ -1,4 +1,5 @@
 #include <VertMainMenu.h>
+#include <VertSettings.h>
 
 VertMainMenu* VertMainMenu::get() {
 	if (instance == nullptr) {
@@ -25,9 +26,9 @@ void VertMainMenu::render() {
 
 	if (ImGui::BeginMenu("Tools")) {
 
-		ImGui::MenuItem("Show Dear ImGui Demo", "F11", &VertShared::ShowDemo);
-		ImGui::MenuItem("Show FPS Counter", nullptr, &VertFpsCounter::get()->show_);
-		ImGui::MenuItem("VSync", nullptr, &VertShared::VSync);
+		ImGui::MenuItem("Show Dear ImGui Demo", "F11", &GET_SETTING(show_demo));
+		ImGui::MenuItem("Show FPS Counter", nullptr, &GET_SETTING(show_fps));
+		ImGui::MenuItem("VSync", nullptr, &GET_SETTING(vsync));
 
 		ImGui::EndMenu();
 	}

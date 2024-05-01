@@ -8,14 +8,6 @@ namespace VertShared {
 
 	inline GLFWwindow* Window;
 
-	inline bool ShowDemo = false;
-
-	inline ImFont* TitleFont;
-
-	inline GLuint IconTexture;
-
-	inline bool VSync = false;
-
     inline const char* getGlslVersion() {
         // Decide GL+GLSL versions
 #if defined(IMGUI_IMPL_OPENGL_ES2)

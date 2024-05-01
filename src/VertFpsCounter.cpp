@@ -1,4 +1,5 @@
 #include <VertFpsCounter.h>
+#include <VertSettings.h>
 
 VertFpsCounter* VertFpsCounter::get() {
 	if (instance == nullptr) {
@@ -8,6 +9,7 @@ VertFpsCounter* VertFpsCounter::get() {
 }
 
 void VertFpsCounter::render() {
+	show_ = GET_SETTING(show_fps);
 
 	if (show_) {
 		ImGui::BeginMainMenuBar();

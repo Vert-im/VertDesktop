@@ -1,5 +1,5 @@
 #include <VertStyle.h>
-#include "stb_image.h"
+#include <VertResources.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
@@ -11,22 +11,14 @@ VertStyle* VertStyle::get() {
 }
 
 void VertStyle::setup() {
-    auto io = ImGui::GetIO();
-
-    io.Fonts->AddFontFromFileTTF("consola.ttf", 16.0f, nullptr, io.Fonts->GetGlyphRangesCyrillic());
-    VertShared::TitleFont = io.Fonts->AddFontFromFileTTF("consola.ttf", 32.0f, nullptr, io.Fonts->GetGlyphRangesCyrillic());
-
     updateColors();
 
-    int v_w, v_h;
+    auto style = ImGui::GetStyle();
 
-    loadTextureFromFile("icon.png", &VertShared::IconTexture, &v_w, &v_h);
-    setupWindowIcon();
-
-    ImGui::GetStyle().WindowRounding = 4;
-    ImGui::GetStyle().FrameRounding = 3;
-    ImGui::GetStyle().PopupRounding = 3;
-    ImGui::GetStyle().WindowTitleAlign.x = .5f;
+    style.WindowRounding = 4;
+    style.FrameRounding = 3;
+    style.PopupRounding = 3;
+    style.WindowTitleAlign.x = .5f;
 }
 
 void VertStyle::updateColors() {
@@ -67,43 +59,6 @@ void VertStyle::updateColors() {
     colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.14f, 0.42f, 0.23f, 1.00f);
 }
 
-bool VertStyle::loadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
-{
-    // Load from file
-    int image_width = 0;
-    int image_height = 0;
-    unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
-    if (image_data == NULL)
-        return false;
-
-    // Create a OpenGL texture identifier
-    GLuint image_texture;
-    glGenTextures(1, &image_texture);
-    glBindTexture(GL_TEXTURE_2D, image_texture);
-
-    // Setup filtering parameters for display
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    // Upload pixels into texture
-#if defined(GL_UNPACK_ROW_LENGTH) && !defined(__EMSCRIPTEN__)
-    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-#endif
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
-    stbi_image_free(image_data);
-
-    *out_texture = image_texture;
-    *out_width = image_width;
-    *out_height = image_height;
-
-    return true;
-}
-
 void VertStyle::setupWindowIcon() {
-    GLFWimage images[1];
-    images[0].pixels = stbi_load("icon.png", &images[0].width, &images[0].height, 0, 4);
-
-    glfwSetWindowIcon(VertShared::Window, 1, images);
-
-    stbi_image_free(images[0].pixels);
+    glfwSetWindowIcon(VertShared::Window, 1, VertResources::get()->appIcon);
 }

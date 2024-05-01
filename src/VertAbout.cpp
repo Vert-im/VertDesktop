@@ -1,4 +1,5 @@
 ﻿#include <VertAbout.h>
+#include <VertResources.h>
 
 VertAbout* VertAbout::get() {
     if (instance == nullptr) {
@@ -9,7 +10,7 @@ VertAbout* VertAbout::get() {
 
 void VertAbout::render() {
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-    tintModifier = 1.0f;
+    tintModifier = std::ranges::clamp(sinf((float)ImGui::GetTime() * 3.f), 0.5f, 1.f); // Lil animation
 
     if (show_) {
         ImGui::Begin(windowTitle, &show_, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
@@ -19,8 +20,14 @@ void VertAbout::render() {
         ImGui::SetWindowPos({ center.x - size.x / 2.f, center.y - size.y / 2.f });
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 8, 20 });
-        ImGui::PushFont(VertShared::TitleFont);
-        ImGui::Image((void*)(intptr_t)VertShared::IconTexture, ImVec2(32, 32), {0, 0}, {1, 1}, { tintModifier, tintModifier, tintModifier, 1});
+        ImGui::PushFont(VertResources::get()->titleFont);
+
+        ImGui::Image(
+            (void*)(intptr_t)GET_VERT_TEXTURE_DATA("icon.png"), 
+            ImVec2(32, 32), {0, 0}, {1, 1}, 
+            {tintModifier, tintModifier, tintModifier, 1}
+        );
+
         ImGui::SameLine();
 
         ImGui::AlignTextToFramePadding();
@@ -41,9 +48,11 @@ void VertAbout::render() {
             show_ = false;
         }
 
-        if (ImGui::IsKeyPressed(ImGuiKey_Enter, false) || 
+        if ((
+            ImGui::IsKeyPressed(ImGuiKey_Enter, false) || 
             ImGui::IsKeyPressed(ImGuiKey_Escape, false) ||
-            ImGui::IsKeyPressed(ImGuiKey_KeypadEnter, false)) {
+            ImGui::IsKeyPressed(ImGuiKey_KeypadEnter, false)) 
+            && ImGui::IsWindowFocused()) {
             show_ = false;
         }
 

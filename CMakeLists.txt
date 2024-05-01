@@ -9,7 +9,7 @@ if (WIN32)
 	set(VCPKG_LIBRARY_LINKAGE static)
 	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
 
-	set(HIDE_WINDOWS_CONSOLE_ On)
+	set(HIDE_WINDOWS_CONSOLE_ False)
 endif()
 
 find_package(OpenGL REQUIRED)
@@ -49,14 +49,10 @@ else()
 	target_link_libraries(${PROJECT_NAME} PRIVATE ${LINKABLE_LIBS})
 endif()
 
-add_custom_command(
-  TARGET ${PROJECT_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different
-  ${PROJECT_SOURCE_DIR}/fonts/consola.ttf
-  consola.ttf)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/fonts/ ${PROJECT_BINARY_DIR}/fonts/)
 
-add_custom_command(
-  TARGET ${PROJECT_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different
-  ${PROJECT_SOURCE_DIR}/images/icon.png
-  icon.png)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/images/ ${PROJECT_BINARY_DIR}/images/)

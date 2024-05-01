@@ -12,6 +12,7 @@ public:
 	static VertAbout* get();
 
 	bool show_ = false;
+	bool focused = false;
 	float tintModifier = 1.0f;
 	const char* windowTitle = "Vert / About";
 

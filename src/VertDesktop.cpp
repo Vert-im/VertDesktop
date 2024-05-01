@@ -1,4 +1,5 @@
 ﻿#include "VertDesktop.h"
+#include "VertResources.h"
 
 
 void vert_awake() {
@@ -15,9 +16,9 @@ void vert_start() {
     style->setup();
     style->updateColors();
 
-    VertShared::VSync = GET_SETTING(vsync);
-    VertShared::ShowDemo = GET_SETTING(show_demo);
-    VertFpsCounter::get()->show_ = GET_SETTING(show_fps);
+    VertResources::get()->init();
+
+    VertStyle::get()->setupWindowIcon();
 
     if (GET_SETTING(maximize))
         glfwMaximizeWindow(VertShared::Window);
@@ -32,19 +33,15 @@ void vert_main_update() {
     VertAbout::get()->render();
 
 
-    if (VertShared::ShowDemo) {
-        ImGui::ShowDemoWindow(&VertShared::ShowDemo);
+    if (GET_SETTING(show_demo)) {
+        ImGui::ShowDemoWindow(&GET_SETTING(show_demo));
     }
 
 }
 
 
 void vert_on_exit() {
-    SET_SETTING(vsync, VertShared::VSync);
-    SET_SETTING(show_demo, VertShared::ShowDemo);
-    SET_SETTING(show_fps, VertFpsCounter::get()->show_);
     SET_SETTING(maximize, glfwGetWindowAttrib(VertShared::Window, GLFW_MAXIMIZED) == GLFW_TRUE);
-
     VertSettings::get()->save();
 }
 
@@ -82,7 +79,7 @@ int vert_main() { // ДАЛЬШЕ БОГА НЕТ
 
     while (!glfwWindowShouldClose(VertShared::Window))
     {
-        glfwSwapInterval(VertShared::VSync ? 1 : 0); // Just fuck you OpenGL
+        glfwSwapInterval(GET_SETTING(vsync) ? 1 : 0); // Just fuck you OpenGL
         glfwPollEvents();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();

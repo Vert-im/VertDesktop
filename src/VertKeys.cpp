@@ -1,4 +1,5 @@
 #include <VertKeys.h>
+#include <VertSettings.h>
 
 VertKeys* VertKeys::get() {
 	if (instance == nullptr) {
@@ -12,8 +13,7 @@ void VertKeys::update() {
         glfwSetWindowShouldClose(VertShared::Window, 1);
     }
 
-
     if (ImGui::IsKeyPressed(ImGuiKey_F11, false)) {
-        VertShared::ShowDemo = !VertShared::ShowDemo;
+        SET_SETTING(show_demo, !GET_SETTING(show_demo));
     }
 }
