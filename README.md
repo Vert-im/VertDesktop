@@ -33,9 +33,14 @@ Press OK
 Install all dependencies using vcpkg:
 
 `vcpkg install glfw3:x64-windows-static`
+
 `vcpkg install imgui[core,opengl3-binding,glfw-binding]:x64-windows-static`
+
 `vcpkg install spdlog:x64-windows-static`
+
 `vcpkg install nlohmann-json:x64-windows-static`
+
+**MAKE SURE YOU SET ALL PATHS IN CMakeSettings CORRECTLY! (for example, vcpkg toolchain path, dependencies paths etc.)**
 
 ## Building
 
