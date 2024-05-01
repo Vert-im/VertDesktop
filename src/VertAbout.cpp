@@ -1,5 +1,4 @@
 ﻿#include <VertAbout.h>
-#include <corecrt_math.h>
 
 VertAbout* VertAbout::get() {
     if (instance == nullptr) {
@@ -10,7 +9,7 @@ VertAbout* VertAbout::get() {
 
 void VertAbout::render() {
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-    tintModifier = std::ranges::clamp(sinf((float)ImGui::GetTime() * 2.f) * 0.5f + 0.5f, 0.5f, 1.f);
+    tintModifier = 1.0f;
 
     if (show_) {
         ImGui::Begin(windowTitle, &show_, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
