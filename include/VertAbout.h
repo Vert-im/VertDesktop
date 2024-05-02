@@ -2,6 +2,7 @@
 #include <ranges>
 #include <algorithm>
 #include <cstdint>
+#include <cmath>
 #include <imgui.h>
 #include <GLFW/glfw3.h>
 #include <VertShared.h>
