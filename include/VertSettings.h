@@ -25,6 +25,10 @@ public:
 	bool show_demo;
 	bool show_fps;
 	bool maximize;
+	int window_pos_x;
+	int window_pos_y;
+	int window_size_x;
+	int window_size_y;
 };
 
 class VertSettings {

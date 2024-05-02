@@ -36,6 +36,7 @@ public:
 	ImFont* titleFont;
 
 	void init();
+	void loadImages();
 	void loadAppIcon();
 	void loadFonts();
 	bool loadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);

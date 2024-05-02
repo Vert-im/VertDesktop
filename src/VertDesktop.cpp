@@ -41,7 +41,23 @@ void vert_main_update() {
 
 
 void vert_on_exit() {
-    SET_SETTING(maximize, glfwGetWindowAttrib(VertShared::Window, GLFW_MAXIMIZED) == GLFW_TRUE);
+    auto maximized = glfwGetWindowAttrib(VertShared::Window, GLFW_MAXIMIZED) == GLFW_TRUE;
+    SET_SETTING(maximize, maximized);
+
+    int window_x_pos, window_y_pos;
+    int window_x_size, window_y_size;
+
+    glfwGetWindowPos(VertShared::Window, &window_x_pos, &window_y_pos);
+    glfwGetWindowSize(VertShared::Window, &window_x_size, &window_y_size);
+
+    if (!maximized) {
+        SET_SETTING(window_pos_x, window_x_pos);
+        SET_SETTING(window_pos_y, window_y_pos);
+
+        SET_SETTING(window_size_x, window_x_size);
+        SET_SETTING(window_size_y, window_y_size);
+    }
+
     VertSettings::get()->save();
 }
 
@@ -55,11 +71,13 @@ int vert_main() { // ДАЛЬШЕ БОГА НЕТ
 
     auto glsl_version = VertShared::getGlslVersion();
 
-    VertShared::Window = glfwCreateWindow(1280, 720, "Vert", nullptr, nullptr);
+    VertShared::Window = glfwCreateWindow(GET_SETTING(window_size_x), GET_SETTING(window_size_y), "Vert", nullptr, nullptr);
     if (VertShared::Window == nullptr)
         return 1;
 
     glfwMakeContextCurrent(VertShared::Window);
+
+    glfwSetWindowPos(VertShared::Window, GET_SETTING(window_pos_x), GET_SETTING(window_pos_y));
 
     IMGUI_CHECKVERSION();
 
@@ -83,11 +101,11 @@ int vert_main() { // ДАЛЬШЕ БОГА НЕТ
         glfwPollEvents();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
+
         ImGui::NewFrame();
-
         vert_main_update();
-
         ImGui::Render();
+
 
         int display_w, display_h;
 

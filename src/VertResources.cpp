@@ -11,10 +11,14 @@ VertResources* VertResources::get() {
 
 
 void VertResources::init() {
-    LOAD_VERT_TEXTURE("images/icon.png", "icon.png", icon);
-
+    loadImages();
     loadAppIcon();
     loadFonts();
+}
+
+
+void VertResources::loadImages() {
+    LOAD_VERT_TEXTURE("images/icon.png", "icon.png", icon);
 }
 
 

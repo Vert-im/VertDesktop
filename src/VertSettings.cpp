@@ -21,10 +21,18 @@ void VertSettings::load() {
 		spdlog::error("Failed to load config from file: {}", ex.what());
 	}
 
+	GLFWmonitor* MyMonitor = glfwGetPrimaryMonitor();
+
+	const GLFWvidmode* mode = glfwGetVideoMode(MyMonitor);
+
 	LOAD_SETTING(vsync, false);
 	LOAD_SETTING(show_fps, false);
 	LOAD_SETTING(show_demo, false);
 	LOAD_SETTING(maximize, false);
+	LOAD_SETTING(window_pos_x, mode->width / 2 - 640);
+	LOAD_SETTING(window_pos_y, mode->height / 2 - 360);
+	LOAD_SETTING(window_size_x, 1280);
+	LOAD_SETTING(window_size_y, 720);
 }
 
 void VertSettings::save() {
@@ -34,6 +42,10 @@ void VertSettings::save() {
 	SAVE_SETTING(show_fps);
 	SAVE_SETTING(show_demo);
 	SAVE_SETTING(maximize);
+	SAVE_SETTING(window_pos_x);
+	SAVE_SETTING(window_pos_y);
+	SAVE_SETTING(window_size_x);
+	SAVE_SETTING(window_size_y);
 
 	f << state.dump();
 	f.close();
