@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <cmath>
+#include <math.h>
 #include <imgui.h>
 #include <GLFW/glfw3.h>
 #include <VertShared.h>
