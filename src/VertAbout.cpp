@@ -10,11 +10,9 @@ VertAbout* VertAbout::get() {
 
 void VertAbout::render() {
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-#if WIN32
-    tintModifier = std::ranges::clamp(std::sinf((float)ImGui::GetTime() * 3.f), 0.5f, 1.f); // Lil animation
-#elif
+    // tintModifier = std::ranges::clamp(std::sinf((float)ImGui::GetTime() * 3.f), 0.5f, 1.f); // Lil animation
+
     tintModifier = 1.f;
-#endif
 
     if (show_) {
         ImGui::Begin(windowTitle, &show_, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
