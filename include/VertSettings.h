@@ -29,6 +29,7 @@ public:
 	int window_pos_y;
 	int window_size_x;
 	int window_size_y;
+	std::string token;
 };
 
 class VertSettings {

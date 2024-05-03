@@ -5,6 +5,7 @@
 #include "VertAbout.h"
 #include "VertStyle.h"
 #include "VertSettings.h"
+#include "VertRegisterForm.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"

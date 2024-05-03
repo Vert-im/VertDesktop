@@ -33,6 +33,7 @@ void VertSettings::load() {
 	LOAD_SETTING(window_pos_y, mode->height / 2 - 360);
 	LOAD_SETTING(window_size_x, 1280);
 	LOAD_SETTING(window_size_y, 720);
+	LOAD_SETTING(token, "");
 }
 
 void VertSettings::save() {
@@ -46,6 +47,7 @@ void VertSettings::save() {
 	SAVE_SETTING(window_pos_y);
 	SAVE_SETTING(window_size_x);
 	SAVE_SETTING(window_size_y);
+	SAVE_SETTING(token);
 
 	f << state.dump();
 	f.close();

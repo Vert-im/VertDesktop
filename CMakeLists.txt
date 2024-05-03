@@ -36,8 +36,7 @@ endif()
 
 target_include_directories(${PROJECT_NAME} PUBLIC 
 	include
-	thirdparty/imgui
-	thirdparty/backends
+	include/widgets
 )
 
 set(LINKABLE_LIBS OpenGL::GL glfw imgui::imgui spdlog::spdlog nlohmann_json::nlohmann_json)
