@@ -1,32 +1,26 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "vert-desktop",
-  "version": "0.01",
+  "version": "0.1.1",
   "dependencies": [
     {
-      "name": "opengl",
-      "platform": "x64-windows-static"
+      "name": "opengl"
     },
     {
-      "name": "glfw3",
-      "platform": "x64-windows-static"
+      "name": "glfw3"
     },
     {
       "name": "imgui",
-      "platform": "x64-windows-static",
       "features": [
-        "core",
         "opengl3-binding",
         "glfw-binding"
       ]
     },
     {
-      "name": "spdlog",
-      "platform": "x64-windows-static"
+      "name": "spdlog"
     },
     {
-      "name": "nlohmann-json",
-      "platform": "x64-windows-static"
+      "name": "nlohmann-json"
     }
   ]
 }
