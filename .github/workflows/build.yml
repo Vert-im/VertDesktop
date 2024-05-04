@@ -21,6 +21,9 @@ jobs:
 
       - name: Setup anew (or from cache) vcpkg (and does not build any package)
         uses: lukka/run-vcpkg@v11
+        with:
+            vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+            runVcpkgInstall: true
 
       #- name: Install vcpkg
       #  run: |
@@ -46,7 +49,7 @@ jobs:
           build-dir: ${{ runner.workspace }}/build
           cc: ${{ matrix.config.cc }}
           cxx: ${{ matrix.config.cxx }}
-          configure-options: -G Ninja -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DVCPKG_ROOT:PATH=%VCPKG_ROOT%
+          configure-options: -G Ninja -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DCMAKE_TOOLCHAIN_FILE:STRING=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_ROOT:PATH=${{ github.workspace }}/vcpkg
           build-type: Release
 
       # Optional: Upload artifacts (built binaries)
