@@ -31,6 +31,7 @@ jobs:
     - name: Run Vcpkg
       uses: lukka/run-vcpkg@v7.6
       with:
+        vcpkgArguments: 'install opengl:x64-windows-static glfw3:x64-windows-static imgui[core,opengl3-binding,glfw-binding]:x64-windows-static spdlog:x64-windows-static nlohmann-json:x64-windows-static'
         vcpkgDirectory: ${{ env.VCPKG_ROOT }}
 
     - name: Install Vcpkg integration
@@ -39,7 +40,7 @@ jobs:
     - name: Configure CMake 
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE:PATH=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DVCPKG_ROOT=${{ env.VCPKG_ROOT }}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DVCPKG_TARGET_TRIPLET:STRING=x64-windows-static -DCMAKE_TOOLCHAIN_FILE:PATH=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DVCPKG_ROOT=${{ env.VCPKG_ROOT }}
 
     - name: Build
       # Build your program with the given configuration
