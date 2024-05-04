@@ -1,0 +1,41 @@
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        # Define different build configurations if needed
+        mode: [RelWithDebInfo]
+    steps:
+      - uses: actions/checkout@v3
+
+      # Setup vcpkg
+      - name: Install vcpkg
+        run: |
+          set PATH=%PATH%;C:\Users\runner\AppData\Local\Microsoft\WindowsApps\Microsoft.VisualStudio.2022Preview\VC\Auxiliary\Build\vcpkg
+          vcpkg install --triplet x64-windows-static opengl glfw3 imgui[core,opengl3-binding,glfw-binding] spdlog nlohmann-json
+
+      # Configure environment for clang-cl 17 and Ninja
+      - name: Use Clang-CL 17
+        uses: gr2m/setup-clang@v1
+        with:
+          version: '17'
+          platforms: x64
+          install-ninja: true
+
+      # Build project
+      - name: Configure with CMake
+        run: |
+          mkdir build
+          cd build
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DVCPKG_ROOT:PATH=%VCPKG_ROOT% ..
+
+      - name: Build with Ninja
+        run: |
+          cd build
+          ninja
+
+      # Optional: Upload artifacts (built binaries)
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-${{ matrix.mode }}
+          path: build/
