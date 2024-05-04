@@ -31,6 +31,7 @@ void vert_main_update() {
     VertMainMenu::get()->render();
     VertFpsCounter::get()->render();
     VertAbout::get()->render();
+
     VertWidgets::VertRegisterForm();
 
 

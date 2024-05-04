@@ -15,6 +15,10 @@
           "name": "VCPKG_TARGET_TRIPLET",
           "value": "x64-windows-static",
           "type": "STRING"
+        },
+        {
+          "name": "CMAKE_MSVC_RUNTIME_LIBRARY",
+          "value": "MultiThreaded$<$<CONFIG:Release>:Release>"
         }
       ]
     }

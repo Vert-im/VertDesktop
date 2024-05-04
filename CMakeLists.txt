@@ -5,9 +5,10 @@ project ("VertDesktop")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+
 if (WIN32)
 	set(VCPKG_LIBRARY_LINKAGE static)
-	# set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
 
 	set(HIDE_WINDOWS_CONSOLE_ False)
 endif()
@@ -50,8 +51,8 @@ endif()
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/fonts/ ${PROJECT_BINARY_DIR}/fonts/)
+                       ${CMAKE_SOURCE_DIR}/fonts/ ${EXECUTABLE_OUTPUT_PATH}/fonts/)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/images/ ${PROJECT_BINARY_DIR}/images/)
+                       ${CMAKE_SOURCE_DIR}/images/ ${EXECUTABLE_OUTPUT_PATH}/images/)
