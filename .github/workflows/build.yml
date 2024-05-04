@@ -18,10 +18,10 @@ jobs:
       - name: Setup anew (or from cache) vcpkg (and does not build any package)
         uses: lukka/run-vcpkg@v11
 
-      - name: Install vcpkg
-        run: |
-          set PATH=%PATH%;C:\Users\runner\AppData\Local\Microsoft\WindowsApps\Microsoft.VisualStudio.2022Preview\VC\Auxiliary\Build\vcpkg
-          vcpkg install --triplet x64-windows-static opengl glfw3 imgui[core,opengl3-binding,glfw-binding] spdlog nlohmann-json
+      #- name: Install vcpkg
+      #  run: |
+      #    set PATH=%PATH%;C:\Users\runner\AppData\Local\Microsoft\WindowsApps\Microsoft.VisualStudio.2022Preview\VC\Auxiliary\Build\vcpkg
+      #    vcpkg install --triplet x64-windows-static opengl glfw3 imgui[core,opengl3-binding,glfw-binding] spdlog nlohmann-json
 
       # Configure environment for clang-cl 17 and Ninja
       - name: Use Clang-CL 17
