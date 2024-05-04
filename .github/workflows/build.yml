@@ -23,6 +23,12 @@ jobs:
       #    set PATH=%PATH%;C:\Users\runner\AppData\Local\Microsoft\WindowsApps\Microsoft.VisualStudio.2022Preview\VC\Auxiliary\Build\vcpkg
       #    vcpkg install --triplet x64-windows-static opengl glfw3 imgui[core,opengl3-binding,glfw-binding] spdlog nlohmann-json
 
+      - name: Setup Ninja
+        uses: ashutoshvarma/setup-ninja@master
+        with:
+          # ninja version to download. Default: 1.10.0
+          version: 1.10.0
+
       # Configure environment for clang-cl 17 and Ninja
       - name: Use Clang-CL 17
         uses: egor-tensin/setup-clang@v1
