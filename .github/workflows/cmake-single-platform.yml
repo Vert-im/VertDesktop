@@ -37,7 +37,7 @@ jobs:
         vcpkgGitCommitId: 326d8b43e365352ba3ccadf388d989082fe0f2a6
 
     - name: Install Dependencies using Vcpkg
-      run: ${{ env.VCPKG_ROOT }}/vcpkg install opengl:x64-windows-static glfw3:x64-windows-static imgui[core,opengl3-binding,glfw-binding]:x64-windows-static spdlog:x64-windows-static nlohmann-json:x64-windows-static
+      run: ${{ env.VCPKG_ROOT }}/vcpkg install --triplet x64-windows-static
 
     - name: Install Vcpkg integration
       run: ${{ env.VCPKG_ROOT }}/vcpkg integrate install
