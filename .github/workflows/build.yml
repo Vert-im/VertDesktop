@@ -8,8 +8,8 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        # Define different build configurations if needed
-        mode: [RelWithDebInfo]
+        config:
+          - { name: "Windows MSVC", os: windows-latest, cc: "cl", cxx: "cl" }
     steps:
       - uses: actions/checkout@v3
 
@@ -30,24 +30,20 @@ jobs:
           version: 1.10.0
 
       # Configure environment for clang-cl 17 and Ninja
-      - name: Use Clang-CL 17
-        uses: egor-tensin/setup-clang@v1
+      #- name: Use Clang-CL 17
+      #  uses: egor-tensin/setup-clang@v1
+      #  with:
+      #    version: latest
+      #    platform: x64
+
+      - name: Build with CMake
+        uses: ashutoshvarma/action-cmake-build@master
         with:
-          version: latest
-          platforms: x64
-          install-ninja: true
-
-      # Build project
-      - name: Configure with CMake
-        run: |
-          mkdir build
-          cd build
-          cmake -G Ninja -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DVCPKG_ROOT:PATH=%VCPKG_ROOT% ..
-
-      - name: Build with Ninja
-        run: |
-          cd build
-          ninja
+          build-dir: ${{ runner.workspace }}/build
+          cc: cl
+          cxx: cl
+          configure-options: -G Ninja -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DVCPKG_ROOT:PATH=%VCPKG_ROOT%
+          build-type: Release
 
       # Optional: Upload artifacts (built binaries)
       - uses: actions/upload-artifact@v3
