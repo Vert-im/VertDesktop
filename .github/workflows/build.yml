@@ -30,18 +30,18 @@ jobs:
           version: 1.10.0
 
       # Configure environment for clang-cl 17 and Ninja
-      #- name: Use Clang-CL 17
-      #  uses: egor-tensin/setup-clang@v1
-      #  with:
-      #    version: latest
-      #    platform: x64
+      - name: Use Clang-CL 17
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
 
       - name: Build with CMake
         uses: ashutoshvarma/action-cmake-build@master
         with:
           build-dir: ${{ runner.workspace }}/build
-          cc: cl
-          cxx: cl
+          cc: ${{ matrix.config.cc }}
+          cxx: ${{ matrix.config.cxx }}
           configure-options: -G Ninja -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DVCPKG_ROOT:PATH=%VCPKG_ROOT%
           build-type: Release
 
