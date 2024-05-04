@@ -1,5 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "vert-desktop",
+  "version": "0.01",
   "dependencies": [
     {
       "name": "opengl",
