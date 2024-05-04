@@ -12,6 +12,10 @@ jobs:
           - { name: "Windows MSVC", os: windows-latest, cc: "cl", cxx: "cl" }
     steps:
       - uses: actions/checkout@v3
+  
+      # Setup MSVC
+
+      - uses: ilammy/msvc-dev-cmd@v1.4.1
 
       # Setup vcpkg
 
@@ -30,11 +34,11 @@ jobs:
           version: 1.10.0
 
       # Configure environment for clang-cl 17 and Ninja
-      - name: Use Clang-CL 17
-        uses: egor-tensin/setup-clang@v1
-        with:
-          version: latest
-          platform: x64
+      #- name: Use Clang-CL 17
+      #  uses: egor-tensin/setup-clang@v1
+      #  with:
+      #    version: latest
+      #    platform: x64
 
       - name: Build with CMake
         uses: ashutoshvarma/action-cmake-build@master
