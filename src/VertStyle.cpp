@@ -28,8 +28,6 @@ void VertStyle::updateColors() {
     colors[ImGuiCol_WindowBg] = ImVec4{ 0.12f, 0.12f, 0.12f, 1.0f };
     colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.48f, 0.30f, 0.54f);
 
-    colors[ImGuiCol_TextDisabled] = ImVec4(0.29f, 0.78f, 0.51f, 0.54f);
-
     colors[ImGuiCol_FrameBgHovered] = ImVec4(0.26f, 0.98f, 0.72f, 0.40f);
     colors[ImGuiCol_FrameBgActive] = ImVec4(0.26f, 0.98f, 0.70f, 0.67f);
 

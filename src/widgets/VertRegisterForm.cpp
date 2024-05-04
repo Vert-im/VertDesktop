@@ -5,9 +5,12 @@
 
 bool VertWidgets::VertRegisterForm() {
 	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+
+    ImGui::SetNextWindowSize({ 350, 0 });
+
     ImGui::Begin(
         "Vert / Register", nullptr, 
-        ImGuiWindowFlags_AlwaysAutoResize | 
+        // ImGuiWindowFlags_AlwaysAutoResize | 
         ImGuiWindowFlags_NoMove | 
         ImGuiWindowFlags_NoCollapse | 
         ImGuiWindowFlags_NoBackground |
@@ -37,18 +40,18 @@ bool VertWidgets::VertRegisterForm() {
     ImGui::AlignTextToFramePadding();
 
     static char username[128] = "";
-    VertWidgets::VertFormTextInput("Username", "SsNiPeR1", username, IM_ARRAYSIZE(username));
+    VertWidgets::VertFormTextInput("##Register/Username", "Username", username, IM_ARRAYSIZE(username));
 
     static char email[128] = "";
-    VertWidgets::VertFormTextInput("E-mail", "ssniper1@ssniper1.cc", email, IM_ARRAYSIZE(email));
+    VertWidgets::VertFormTextInput("##Register/E-mail", "email@example.com", email, IM_ARRAYSIZE(email));
 
-    static char password[128] = "";
-    VertWidgets::VertFormTextInput("Password", "*****************", password, IM_ARRAYSIZE(password), ImGuiInputTextFlags_Password);
+    static char password[256] = "";
+    VertWidgets::VertFormTextInput("##Register/Password", "*****************", password, IM_ARRAYSIZE(password), ImGuiInputTextFlags_Password);
 
     ImGui::PopStyleVar();
 
 
-    if (VertWidgets::VertFormButton("OK", ImVec2(350, 0)) ||
+    if (VertWidgets::VertFormButton("OK", ImVec2(-1, 0)) ||
         ((
         ImGui::IsKeyPressed(ImGuiKey_Enter, false) ||
         ImGui::IsKeyPressed(ImGuiKey_Escape, false) ||

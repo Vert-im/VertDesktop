@@ -1,5 +1,6 @@
 ﻿#include <VertAbout.h>
 #include <VertResources.h>
+#include <VertFormButton.h>
 
 VertAbout* VertAbout::get() {
     if (instance == nullptr) {
@@ -15,7 +16,7 @@ void VertAbout::render() {
     //tintModifier = 1.f;
 
     if (show_) {
-        ImGui::Begin(windowTitle, &show_, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+        ImGui::Begin(windowTitle, &show_, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_Modal);
 
         auto size = ImGui::GetWindowSize();
 
@@ -46,15 +47,13 @@ void VertAbout::render() {
 
         ImGui::PopStyleVar();
 
-        if (ImGui::Button("OK", ImVec2(ImGui::GetWindowSize().x - ImGui::GetStyle().WindowPadding.x * 2, 0))) {
-            show_ = false;
-        }
-
-        if ((
-            ImGui::IsKeyPressed(ImGuiKey_Enter, false) || 
+        if (
+            VertWidgets::VertFormButton("OK", { 500, 0 }) ||
+            (ImGui::IsKeyPressed(ImGuiKey_Enter, false) || 
             ImGui::IsKeyPressed(ImGuiKey_Escape, false) ||
             ImGui::IsKeyPressed(ImGuiKey_KeypadEnter, false)) 
             && ImGui::IsWindowFocused()) {
+
             show_ = false;
         }
 
