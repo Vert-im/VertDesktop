@@ -42,7 +42,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 set(LINKABLE_LIBS OpenGL::GL glfw imgui::imgui spdlog::spdlog nlohmann_json::nlohmann_json)
 
 if (WIN32)
-	target_link_directories(${PROJECT_NAME} PRIVATE thirdparty/win32)
+	target_link_directories(${PROJECT_NAME} PRIVATE thirdparty/windows)
 	target_link_libraries(${PROJECT_NAME} PRIVATE glew32 ${LINKABLE_LIBS})
 else()
 	target_link_libraries(${PROJECT_NAME} PRIVATE ${LINKABLE_LIBS})
