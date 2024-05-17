@@ -25,7 +25,7 @@ jobs:
     - name: Setup Arch Linux environment
       # You may pin to the exact commit or the version.
       # uses: RangHo/setup-arch@4849cfe4dd8d4dea319e973d239768d36cc1af60
-      uses: RangHo/setup-arch@v1.1.0
+      uses: RangHo/setup-arch@4849cfe4dd8d4dea319e973d239768d36cc1af60
       with:
         version: latest
         mirror: https://geo.mirror.pkgbuild.com
@@ -34,7 +34,7 @@ jobs:
     - name: Enter Arch Environment
       run: |
         cat /etc/os-release
-        shell: arch.sh {0}
+      shell: arch.sh {0}
       
     - name: Run Vcpkg
       uses: lukka/run-vcpkg@v7.6
