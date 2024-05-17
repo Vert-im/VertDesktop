@@ -22,10 +22,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
-    - uses: actions/checkout@v1
-    - name: Install Archlinux
-      run: curl -L https://github.com/zaoqi/github-actions-archlinux/raw/master/install.sh | sh
+    - name: Setup Arch Linux environment
+      # You may pin to the exact commit or the version.
+      # uses: RangHo/setup-arch@4849cfe4dd8d4dea319e973d239768d36cc1af60
+      uses: RangHo/setup-arch@v1.1.0
 
     - name: Install dependencies for X11
       run: |
