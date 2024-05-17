@@ -23,11 +23,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Get CMake and Ninja
-      uses: lukka/get-cmake@v3.29.2
-      with:
-        cmakeVersion: 3.29.0
-
+    - uses: actions/checkout@v1
+    - name: Install Archlinux
+      run: curl -L https://github.com/zaoqi/github-actions-archlinux/raw/master/install.sh | sh
+      
     - name: Run Vcpkg
       uses: lukka/run-vcpkg@v7.6
       with:
@@ -38,8 +37,7 @@ jobs:
 
     - name: Install dependencies for X11
       run: |
-        sudo apt update
-        sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
+        sudo pacman --noconfirm -Syu cmake clang xorg
 
     - name: Install Dependencies using Vcpkg for X11
       run: ${{ env.VCPKG_ROOT }}/vcpkg install
@@ -47,20 +45,10 @@ jobs:
     - name: Install Vcpkg integration
       run: ${{ env.VCPKG_ROOT }}/vcpkg integrate install
 
-    - name: Install Clang
-      uses: egor-tensin/setup-clang@v1
-      with:
-        version: 17
-
-    - name: Install LLVM C++ Lib
-      run: |
-        sudo apt update
-        sudo apt install libc++1-12
-
     - name: Configure CMake for X11
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_EXE_LINKER_FLAGS="${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DVCPKG_TARGET_TRIPLET:STRING=x64-linux -DCMAKE_TOOLCHAIN_FILE:PATH=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DVCPKG_ROOT=${{ env.VCPKG_ROOT }}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DVCPKG_TARGET_TRIPLET:STRING=x64-linux -DCMAKE_TOOLCHAIN_FILE:PATH=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DVCPKG_ROOT=${{ env.VCPKG_ROOT }}
 
     - name: Build for X11
       # Build your program with the given configuration
