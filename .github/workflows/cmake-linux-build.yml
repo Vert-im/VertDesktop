@@ -37,7 +37,7 @@ jobs:
 
     - name: Install dependencies for X11
       run: |
-        sudo pacman --noconfirm -Syu cmake clang xorg
+        sudo pacman --noconfirm -Syu cmake clang xorg curl zip unzip ninja
 
     - name: Install Dependencies using Vcpkg for X11
       run: ${{ env.VCPKG_ROOT }}/vcpkg install
