@@ -25,7 +25,7 @@ jobs:
     - name: Setup Arch Linux environment
       # You may pin to the exact commit or the version.
       # uses: RangHo/setup-arch@4849cfe4dd8d4dea319e973d239768d36cc1af60
-      uses: RangHo/setup-arch@4849cfe4dd8d4dea319e973d239768d36cc1af60
+      uses: relativemodder/setup-arch@main
       with:
         version: latest
         mirror: https://geo.mirror.pkgbuild.com
